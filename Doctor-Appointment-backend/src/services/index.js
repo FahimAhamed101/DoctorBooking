@@ -1,0 +1,22 @@
+module.exports.authService = require("./auth.service");
+module.exports.emailService = require("./email.service");
+module.exports.tokenService = require("./token.service");
+module.exports.userService = require("./user.service");
+module.exports.adminService = require("./admin.service");
+module.exports.subscriptionService = require("./subscription.service");
+module.exports.teamService = require("./team.service");
+module.exports.documentService = require("./document.service");
+module.exports.blogService = require("./blog.service");
+module.exports.geminiService = require("./gemini.service");
+module.exports.scheduleService = require("./schedule.service");
+module.exports.appointmentService = require("./appointment.service");
+module.exports.conversationService = require("./conversation.service");
+module.exports.stripeService = require("./stripe.service");
+module.exports.transactionService = require("./transaction.service");
+module.exports.zoomService = require("./zoom.service");
+module.exports.valuesService = require("./values.service");
+module.exports.pushService = require("./push.service");
+
+module.exports.contactService = require("./contact.service");
+module.exports.faqService = require("./faq.service");
+module.exports.infoService = require("./info.service");

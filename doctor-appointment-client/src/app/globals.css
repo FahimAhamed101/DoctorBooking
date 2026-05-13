@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Inter:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'Afacad', sans-serif; /* Using standard Afacad instead of Afacad Flux */
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling on orientation change */
+}
+
+/* Base responsive font sizes */
+html {
+  font-size: 14px; /* Base for small screens */
+}
+
+@media (min-width: 360px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 640px) {
+  html {
+    font-size: 16px;
+  }
+}
+:where(.css-dev-only-do-not-override-ut69n1).ant-drawer-inline{
+  position:  fixed !important;
+}
+/* Ant Design Select component fixes */
+.ant-select-selector {
+  border: none !important;
+  box-shadow: none !important;
+  height: auto !important; /* Better for mobile */
+  min-height: 2.5rem !important; /* Touch-friendly height */
+  padding: 0.5rem !important;
+}
+
+.ant-select-focused .ant-select-selector {
+  outline: none !important;
+}
+.no-scroll {
+  overflow: hidden !important;
+  touch-action: none !important;
+}
+/* Mobile-specific optimizations */
+@media (max-width: 639px) {
+  /* Improve tap targets for mobile */
+  button, a, [role="button"] {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  /* Better form control sizing */
+  input, select, textarea {
+    font-size: 16px !important; /* Prevent iOS zoom */
+  }
+}
+
+/* Prevent layout shifts */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Touch-friendly interactive elements */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Optimize typography for small screens */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+  margin-bottom: 0.5em;
+}
+
+p {
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Global form styles */
+
+
+.ant-picker {
+  border: 1px solid #77C4FE !important; /* gray-300 */
+  border-radius: 0.5rem !important; /* rounded-lg */
+  transition: border-color 0.2s;
+  color: #77C4FE;
+  background-color: transparent;
+  height: 40px !important; /* Ensure consistent height */
+}
+
+.ant-input:hover,
+.ant-select-selector:hover,
+.ant-picker:hover {
+  border-color: #f3f8ff !important; /* blue-500 */
+}
+ .ant-select-selector,
+ .ant-select-selection-search-input
+
+ {
+    border: 1px solid #77C4FE !important;
+    background: #77C4FE;
+    background-color: transparent !important;
+}
+
+.ant-select-focused .ant-select-selector,
+.ant-picker-focused {
+/* blue-500 */
+  box-shadow: none !important;
+}
+
+/* Ensure select dropdown matches input width */
+.ant-select-dropdown {
+  min-width: 200px !important;
+}
+
+.ant-form-item-label > label {
+  font-weight: bold !important;
+}

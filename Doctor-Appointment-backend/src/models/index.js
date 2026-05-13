@@ -1,0 +1,21 @@
+module.exports.Token = require('./token.model');
+module.exports.User = require('./user.model');
+module.exports.Subscription = require("./subscription.model");
+module.exports.Team = require("./team.model");
+module.exports.Document = require("./document.model");
+module.exports.Blog = require("./blog.model");
+module.exports.Comment = require("./comment.model");
+module.exports.Schedule = require("./schedule.model");
+module.exports.Appointment = require("./appointment.model");
+module.exports.Conversation = require("./conversation.model");
+module.exports.Transaction = require("./transaction.model");
+module.exports.Values = require("./values.model");
+
+module.exports.Contact = require("./contact.model");
+module.exports.FAQ = require('./faq.model');
+module.exports.Notification = require('./notification.model');
+module.exports.TermsAndCondition = require('./termsConditions.model');
+module.exports.AboutUs = require('./aboutUs.model');
+module.exports.PrivacyPolicy = require('./privacyPolicy.model');
+module.exports.ChildSafetyPolicy = require("./childSafetyPolicy.model");
+module.exports.Support = require('./support.model');

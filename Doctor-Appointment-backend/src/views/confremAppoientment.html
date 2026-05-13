@@ -1,0 +1,81 @@
+<div style="font-family: Arial, sans-serif; background-color: #f6f9fc; padding: 20px;">
+      <div style="max-width: 600px; margin: auto; background: #ffffff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); overflow: hidden;">
+        
+        <div style="background-color: #4a90e2; color: #ffffff; padding: 20px 30px;">
+          <h2 style="margin: 0;">🩺 Your Appointment is Confirmed! </h2>
+        </div>
+
+        <div style="padding: 20px 30px;">
+          <p style="font-size: 15px; color: #555;">
+            Your appointment has been successfully booked and payment has been confirmed. Below are the details of your appointment:
+          </p>
+
+          <table cellpadding="10" cellspacing="0" style="width: 100%; font-size: 14px; border-collapse: collapse; margin-top: 10px;">
+            <tr>
+              <td style="font-weight: bold; color: #333;">👤 Patient Name:</td>
+              <td>${patientName}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #333;">📧 Email:</td>
+              <td>${patientEmail}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #333;">📞 Phone:</td>
+              <td>${patientPhone}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #333;">🎂 Age:</td>
+              <td>${patientAge}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #333;">⚥ Gender:</td>
+              <td>${patientGender}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #333;">🏠 Address:</td>
+              <td>${patientAddress}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #333;">📝 Visit Type:</td>
+              <td>${visitType || "N/A"}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #333;">🏥 Department:</td>
+              <td>${department || "N/A"}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #333;">🦴 Body Part:</td>
+              <td>${bodyPart || "N/A"}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #333;">📅 Date:</td>
+              <td>${new Date(date).toLocaleDateString()}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #333;">⏰ Time Slot:</td>
+              <td>${timeSlot}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #333;">📄 Reason:</td>
+              <td>${reason || "N/A"}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #333;">💳 Payment Method:</td>
+              <td>${paymentDetails?.method || "Not specified"}</td>
+            </tr>
+          </table>
+
+          <p style="margin-top: 20px; color: #777;">
+            Your appointment has been successfully confirmed. Please keep the appointment ID <strong>${appointmentId}</strong> for reference.
+          </p>
+
+          <p style="font-size: 15px; color: #555;">
+            If you have any questions or need further assistance, feel free to contact us.
+          </p>
+        </div>
+
+        <div style="background-color: #f1f1f1; padding: 15px 30px; text-align: center; font-size: 13px; color: #999;">
+          This is an automated confirmation from your appointment system. If you did not make this booking, please contact support immediately.
+        </div>
+      </div>
+    </div>

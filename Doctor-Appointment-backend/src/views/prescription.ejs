@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>e-Clinic Prescription</title>
+
+    <style>
+      /* Resetting default margin and padding */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f7fb;
+        color: #333;
+      }
+
+      .container {
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      /* Header */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #5ac8fa !important;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #8bcfff !important;
+      }
+
+      .header-left h1 {
+        font-size: 28px;
+        color: #444;
+        margin-bottom: 5px;
+      }
+
+      .header-left p {
+        font-size: 12px;
+        color: #444;
+      }
+
+      .header-left strong {
+        font-size: 16px;
+        color: #444;
+        margin-top: 5px;
+        display: block;
+      }
+
+      .header-right img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+      }
+
+      /* Patient Info Section */
+      .patient-info {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+
+      .fex-box {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        width: 100%;
+      }
+
+      .patient-info-field {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+      }
+
+      .patient-info-field label {
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .patient-info-field span {
+        font-size: 12px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+        display: inline-block;
+      }
+
+      .medication-section {
+        min-height: 50vh;
+      }
+
+      /* Medication Table */
+      .medication-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+        padding: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .medication-table th,
+      .medication-table td {
+        padding: 8px;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .medication-table th {
+        font-weight: bold;
+        font-size: 14px;
+        background-color: #f1f1f1;
+      }
+
+      .medication-table td {
+        font-size: 11px;
+      }
+
+      .medication-table td label {
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .medication-table td input {
+        margin: 0 3px;
+        width: 12px;
+        height: 12px;
+        transform: scale(0.8);
+        cursor: pointer;
+        appearance: none;
+        background-color: #fff;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        position: relative;
+      }
+
+      .medication-table td input:checked {
+        background-color: green;
+        border-color: green;
+      }
+
+      .medication-table td input:checked::before {
+        content: '\2713'; /* Unicode checkmark */
+        color: white;
+        font-size: 14px;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        line-height: 16px;
+      }
+
+      .medication-table td input:not(:checked)::before {
+        content: '';
+      }
+
+      .checkmark {
+        font-size: 5px;
+        color: green !important;
+        background: green !important;
+        display: none;
+      }
+
+      /* Medication note style */
+      .note {
+        font-size: 10px;
+        color: #777;
+        margin-top: 5px;
+        display: block;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 12px;
+        color: #333;
+      }
+
+      footer p {
+        margin-top: 20px;
+        font-size: 12px;
+        color: #777;
+        padding: 10px;
+        border-top: 1px solid #1f8fe0;
+        color: #5cbbff;
+      }
+
+      /* Print Styles */
+      @media print {
+        body {
+          background-color: #1f8fe0;
+        }
+
+        .container {
+          width: 100%;
+          margin: 0;
+          padding: 20px;
+        }
+
+        header,
+        footer {
+          page-break-after: always;
+        }
+
+        header h1,
+        header p {
+          font-size: 24px;
+        }
+
+        .medication-table {
+          margin-top: 20px;
+          width: 100%;
+        }
+
+        .patient-info-field {
+          font-size: 10px;
+        }
+
+        .patient-info-field label {
+          font-size: 10px;
+        }
+
+        .note {
+          font-size: 8px;
+        }
+
+        footer {
+          text-align: center;
+          font-size: 10px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Header Section -->
+      <header>
+        <div class="header-left">
+          <h1>e-Clinic</h1>
+          <p>Specialist online healthcare</p>
+          <strong>Dr. <%= doctorName %></strong>
+        </div>
+        <div class="header-right">
+          <img src="https://raw.githubusercontent.com/shadat-hossan/Image-server/refs/heads/main/main-logo.jpg" alt="e-Clinic Logo" />
+        </div>
+      </header>
+
+      <!-- Patient Info Section -->
+      <div class="patient-info">
+        <div class="fex-box">
+          <div class="patient-info-field">
+            <label for="patient-name">Patient name:</label>
+            <span id="patient-name"><%= patientName %></span>
+          </div>
+
+          <div class="patient-info-field">
+            <label for="address">Address:</label>
+            <span id="address"><%= address %></span>
+          </div>
+
+          <div class="patient-info-field">
+            <label for="date">Date:</label>
+            <span id="date"><%= date %></span>
+          </div>
+        </div>
+
+        <div class="fex-box">
+          <div class="patient-info-field">
+            <label for="age">Age:</label>
+            <span id="age"><%= age %></span>
+          </div>
+
+          <div class="patient-info-field">
+            <label for="gender">Gender:</label>
+            <span id="gender"><%= gender %></span>
+          </div>
+
+          <div class="patient-info-field">
+            <label for="weight">Weight:</label>
+            <span id="weight"><%= weight %></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medication Table Section -->
+      <section class="medication-section">
+        <table class="medication-table">
+          <thead>
+            <tr>
+              <th>Medication</th>
+              <th>Morning</th>
+              <th>Noon</th>
+              <th>Night</th>
+              <th>Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% items.forEach(function(item, index) { %>
+              <tr>
+                <td><%= index + 1 %>. <%= item.name %></td>
+                <td>
+                  <label>
+                    <input type="checkbox" <% if(item.morningBefore) { %>checked<% } %> />
+                    <span>Before</span> 
+                  </label>
+                  <label>
+                    <input type="checkbox" <% if(item.morningAfter) { %>checked<% } %> />
+                    After
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input type="checkbox" <% if(item.noonBefore) { %>checked<% } %> />
+                    Before
+                  </label>
+                  <label>
+                    <input type="checkbox" <% if(item.noonAfter) { %>checked<% } %> />
+                    After
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input type="checkbox" <% if(item.nightBefore) { %>checked<% } %> />
+                    Before
+                  </label>
+                  <label>
+                    <input type="checkbox" <% if(item.nightAfter) { %>checked<% } %> />
+                    After
+                  </label>
+                </td>
+                <td><span class="note"><%= item.note ? item.note : '---' %></span></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Footer Section -->
+      <footer>
+        <p>📞 +923041234567 | 📧 Live@doctor.com</p>
+      </footer>
+    </div>
+  </body>
+</html>
