@@ -69,7 +69,12 @@ passport.use("jwt", jwtStrategy);
 if (config.env === "production") {
   app.use("/v1/auth", authLimiter);
 }
-
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Doctor Appointment API is running"
+  });
+});
 // Express Monitor
 app.use(status());
 
