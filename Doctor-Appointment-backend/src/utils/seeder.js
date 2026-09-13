@@ -90,7 +90,7 @@ const seedData = async () => {
       weight: { value: 78, unit: "kg" },
       dateOfBirth: new Date("1982-05-14"),
       email: "evansceo246@gmail.com",
-      profileImage: "/uploads/users/doctor-1.png",
+      profileImage: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331021/doctor-booking/users/doctor-1.jpg",
       password: DEFAULT_PASSWORD_HASH,
       callingCode: "+1",
       phoneNumber: 1735566789,
@@ -117,7 +117,7 @@ const seedData = async () => {
       weight: { value: 60, unit: "kg" },
       dateOfBirth: new Date("1994-08-22"),
       email: "user@gmail.com",
-      profileImage: "/uploads/users/patient-1.png",
+      profileImage: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331030/doctor-booking/users/patient-1.png",
       password: DEFAULT_PASSWORD_HASH,
       callingCode: "+1",
       phoneNumber: 1734456873,
@@ -144,7 +144,7 @@ const seedData = async () => {
       weight: { value: 82, unit: "kg" },
       dateOfBirth: new Date("1980-11-03"),
       email: "david.miller@example.com",
-      profileImage: "/uploads/users/patient-2.png",
+      profileImage: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331032/doctor-booking/users/patient-2.png",
       password: DEFAULT_PASSWORD_HASH,
       callingCode: "+1",
       phoneNumber: 1734456899,
@@ -171,7 +171,7 @@ const seedData = async () => {
       weight: { value: 58, unit: "kg" },
       dateOfBirth: new Date("1996-03-17"),
       email: "emily.clark@example.com",
-      profileImage: "/uploads/users/patient-3.png",
+      profileImage: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331034/doctor-booking/users/patient-3.png",
       password: DEFAULT_PASSWORD_HASH,
       callingCode: "+1",
       phoneNumber: 1734456912,
@@ -211,7 +211,7 @@ const seedData = async () => {
       callingCode: "+1",
       phoneNumber: 2125550198,
       email: "dr.wright@trustedgpclinic.com",
-      profileImage: "/uploads/users/doctor-1.png",
+      profileImage: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331021/doctor-booking/users/doctor-1.jpg",
       media: {
         facebook: "https://facebook.com/dr.alex.wright",
         instagram: "https://instagram.com/dralexwright",
@@ -297,7 +297,7 @@ const seedData = async () => {
       callingCode: "+1",
       phoneNumber: 2125550145,
       email: "dr.martinez@trustedgpclinic.com",
-      profileImage: "/uploads/users/doctor-2.png",
+      profileImage: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331023/doctor-booking/users/doctor-2.jpg",
       media: {
         facebook: "https://facebook.com/drsophiamartinez",
         instagram: "https://instagram.com/drsophiamartinez",
@@ -354,7 +354,7 @@ const seedData = async () => {
       callingCode: "+1",
       phoneNumber: 2125550187,
       email: "dr.chen@trustedgpclinic.com",
-      profileImage: "/uploads/users/doctor-3.png",
+      profileImage: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331024/doctor-booking/users/doctor-3.png",
       media: {
         facebook: "https://facebook.com/drmarcuschen",
         instagram: "https://instagram.com/drmarcuschen",
@@ -411,7 +411,7 @@ const seedData = async () => {
       callingCode: "+1",
       phoneNumber: 2125550162,
       email: "dr.green@trustedgpclinic.com",
-      profileImage: "/uploads/users/doctor-4.png",
+      profileImage: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331026/doctor-booking/users/doctor-4.jpg",
       media: {
         facebook: "https://facebook.com/drrachelgreen",
         instagram: "https://instagram.com/drrachelgreen",
@@ -814,7 +814,7 @@ In this comprehensive clinical guide, our internal medicine and cardiology speci
 3. Prioritize Restorative Sleep: Maintaining 7 to 8 hours of uninterrupted sleep normalizes vascular tone and reduces nighttime cortisol spikes.
 4. Active Stress Modulation: Chronic psychosocial stress drives arterial stiffness. Incorporate 10 minutes of daily diaphragmatic breathing or mindfulness.
 5. Routine Diagnostic Screening: Regular blood pressure, lipid, and fasting glucose monitoring allows for early detection long before symptoms emerge.`,
-      coverImage: "/uploads/blogs/cardio-health.jpg",
+      coverImage: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331017/doctor-booking/blogs/cardio-health.png",
       tags: ["cardiology", "heart health", "wellness", "prevention"],
       category: "Cardiology",
       author: superAdmin._id,
@@ -832,7 +832,7 @@ In this comprehensive clinical guide, our internal medicine and cardiology speci
       content: `Navigating your infant's immunization calendar can feel daunting for new parents. Pediatric vaccines undergo decades of safety testing and stringent clinical surveillance, protecting children against life-threatening illnesses such as measles, mumps, rubella, and whooping cough.
 
 In this article, our pediatric department breaks down the key immunization milestones from infancy through kindergarten, addressing safety concerns, common mild side effects (such as low-grade fever), and the critical role of community herd immunity in protecting immunocompromised infants.`,
-      coverImage: "/uploads/blogs/pediatric-care.jpg",
+      coverImage: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331018/doctor-booking/blogs/pediatric-care.png",
       tags: ["pediatrics", "immunization", "childcare", "parenting"],
       category: "Pediatrics",
       author: superAdmin._id,
@@ -854,7 +854,7 @@ We examine evidence-based interventions:
 - Second-generation antihistamines that offer non-sedating symptom relief.
 - Saline nasal rinses to mechanically flush out inhaled particulates.
 - Sublingual immunotherapy (SLIT) for long-term desensitization in refractory cases.`,
-      coverImage: "/uploads/blogs/allergy-care.jpg",
+      coverImage: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331019/doctor-booking/blogs/allergy-care.png",
       tags: ["allergies", "respiratory", "general health", "dermatology"],
       category: "General Medicine",
       author: superAdmin._id,

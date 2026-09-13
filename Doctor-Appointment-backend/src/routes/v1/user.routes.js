@@ -5,6 +5,7 @@ const userValidation = require("../../validations/user.validation");
 const userController = require("../../controllers/user.controller");
 const userFileUploadMiddleware = require("../../middlewares/fileUpload");
 const convertHeicToPngMiddleware = require("../../middlewares/converter");
+const cloudinaryUploadMiddleware = require("../../middlewares/cloudinaryUpload");
 const UPLOADS_FOLDER_USERS = "./public/uploads/users";
 
 const uploadUsers = userFileUploadMiddleware(UPLOADS_FOLDER_USERS);
@@ -20,6 +21,7 @@ router
     validate(userValidation.updateUser),
     [uploadUsers.single("profileImage")],
     convertHeicToPngMiddleware(UPLOADS_FOLDER_USERS),
+    cloudinaryUploadMiddleware("users"),
     userController.updateProfile
   );
 

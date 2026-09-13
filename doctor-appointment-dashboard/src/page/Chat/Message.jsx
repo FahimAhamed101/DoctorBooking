@@ -980,7 +980,7 @@ const MessagePage = () => {
     };
 
     const receiverImage = receiver.profileImage
-        ? `${BASE_URL}${receiver.profileImage}`
+        ? (receiver.profileImage.startsWith('http') ? receiver.profileImage : `${BASE_URL}${receiver.profileImage}`)
         : "/uploads/user.png";
 
     if (error && !loading.initial) {

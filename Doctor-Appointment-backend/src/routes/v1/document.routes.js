@@ -2,6 +2,7 @@ const express = require("express");
 const auth = require("../../middlewares/auth");
 const userFileUploadMiddleware = require("../../middlewares/fileUpload");
 const convertHeicToPngMiddleware = require("../../middlewares/converter");
+const cloudinaryUploadMiddleware = require("../../middlewares/cloudinaryUpload");
 const { documentController } = require("../../controllers");
 
 const UPLOADS_FOLDER_FILES = "./public/uploads/files";
@@ -15,6 +16,7 @@ router
     auth("common"),
     uploadDocument.fields([{ name: "files", maxCount: 8 }]),
     convertHeicToPngMiddleware(UPLOADS_FOLDER_FILES),
+    cloudinaryUploadMiddleware("files"),
     documentController.createDocument
   );
 
@@ -34,6 +36,7 @@ router
     auth("common"),
     uploadDocument.fields([{ name: "files", maxCount: 8 }]),
     convertHeicToPngMiddleware(UPLOADS_FOLDER_FILES),
+    cloudinaryUploadMiddleware("files"),
     documentController.updateDocumentById
   )
   .delete(auth("common"), documentController.deleteDocumentById);

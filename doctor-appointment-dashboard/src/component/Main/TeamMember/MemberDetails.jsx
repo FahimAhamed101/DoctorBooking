@@ -2,10 +2,10 @@ import { HomeOutlined } from "@ant-design/icons";
 import { FaAward } from "react-icons/fa";
 import { FiFacebook, FiLinkedin, FiTwitter } from "react-icons/fi";
 import { MdLocalPhone, MdOutlineEmail, MdSchool, MdWork } from "react-icons/md";
-import { useGetTeamMemberByIdQuery } from "../../../redux/features/product/teamApi";
 import { Skeleton } from "antd";
 import { Link, useParams } from "react-router-dom";
-import { BASE_URL } from "../../../utils/constants";
+import { useGetTeamMemberByIdQuery } from "../../../redux/features/product/teamApi";
+import { BASE_URL, getImageUrl } from "../../../utils/constants";
 const breadcrumbItems = [
   {
     href: "/",
@@ -59,9 +59,7 @@ const MemberDetails = () => {
     );
   }
 
-  const imageUrl = member?.profileImage
-    ? `${BASE_URL }${member.profileImage}`
-    : `${BASE_URL }${member.profileImage}`;
+  const imageUrl = getImageUrl(member?.profileImage, "/default-profile.png");
 
 
   return (

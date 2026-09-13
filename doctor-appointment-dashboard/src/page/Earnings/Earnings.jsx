@@ -5,7 +5,7 @@ import { useState } from "react";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useGetEarningsQuery } from "../../redux/features/dashboard/dashboardApi";
-import { imageBaseUrl } from "../../config/imageBaseUrl";
+import { imageBaseUrl, getImageUrl } from "../../config/imageBaseUrl";
 
 const { Item } = Form;
 
@@ -77,7 +77,7 @@ const Earnings = () => {
         <div className="flex items-center">
           <img
             className="w-8 h-8 rounded-full mr-2"
-            src={`${imageBaseUrl}${record.user?.profileImage || '/uploads/users/user.png'}`}
+            src={getImageUrl(record.user?.profileImage, '/uploads/users/user.png')}
             alt="avatar"
             onError={(e) => {
               e.target.src = "https://randomuser.me/api/portraits/men/1.jpg";
@@ -237,7 +237,7 @@ const Earnings = () => {
               <div className="flex flex-col items-center">
                 <img
                   className="size-24 rounded-full object-cover border-4 border-[#77C4FE]"
-                  src={`${imageBaseUrl}${selectedRecord?.user?.profileImage || '/uploads/users/user.png'}`}
+                  src={getImageUrl(selectedRecord?.user?.profileImage, '/uploads/users/user.png')}
                   alt="Profile"
                  onError={(e) => {
               e.target.src = "https://randomuser.me/api/portraits/men/1.jpg";

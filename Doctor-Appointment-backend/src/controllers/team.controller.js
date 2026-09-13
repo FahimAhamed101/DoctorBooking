@@ -74,7 +74,8 @@ const createTeam = catchAsync(async (req, res) => {
   }
 
   if (req.file) {
-    req.body.profileImage = "/uploads/users/" + req.file.filename;
+    const fileUrl = req.file.secure_url || req.file.url || (req.file.path && req.file.path.startsWith('http') ? req.file.path : null);
+    req.body.profileImage = fileUrl || (req.file.filename && req.file.filename.startsWith('http') ? req.file.filename : "/uploads/users/" + req.file.filename);
   }
 
   const newTeam = await teamService.createTeam(req.body);
@@ -227,7 +228,8 @@ const updateTeamById = catchAsync(async (req, res) => {
   const { id } = req.params;
 
   if (req.file) {
-    req.body.profileImage = "/uploads/users/" + req.file.filename;
+    const fileUrl = req.file.secure_url || req.file.url || (req.file.path && req.file.path.startsWith('http') ? req.file.path : null);
+    req.body.profileImage = fileUrl || (req.file.filename && req.file.filename.startsWith('http') ? req.file.filename : "/uploads/users/" + req.file.filename);
   }
 
   const updatedTeam = await teamService.updateTeamById(id, req.body);

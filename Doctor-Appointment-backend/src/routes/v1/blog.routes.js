@@ -4,6 +4,7 @@ const validate = require("../../middlewares/validate");
 const { blogController } = require("../../controllers");
 const userFileUploadMiddleware = require("../../middlewares/fileUpload");
 const convertHeicToPngMiddleware = require("../../middlewares/converter");
+const cloudinaryUploadMiddleware = require("../../middlewares/cloudinaryUpload");
 const UPLOADS_FOLDER_BLOG = "./public/uploads/blogs";
 
 const uploadUsers = userFileUploadMiddleware(UPLOADS_FOLDER_BLOG);
@@ -17,6 +18,7 @@ router
     auth("superAdmin"),
     [uploadUsers.single("coverImage")],
     convertHeicToPngMiddleware(UPLOADS_FOLDER_BLOG),
+    cloudinaryUploadMiddleware("blogs"),
     blogController.createBlog
   );
 
@@ -27,6 +29,7 @@ router
     auth("superAdmin"),
     [uploadUsers.single("coverImage")],
     convertHeicToPngMiddleware(UPLOADS_FOLDER_BLOG),
+    cloudinaryUploadMiddleware("blogs"),
     blogController.updateBlog
   )
   .delete(auth("superAdmin"), blogController.deleteBlog);

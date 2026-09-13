@@ -18,7 +18,8 @@ const createBlog = catchAsync(async (req, res) => {
 
   req.body.author = req.user.id;
   if (req.file) {
-    req.body.coverImage = "/uploads/blogs/" + req.file.filename;
+    const fileUrl = req.file.secure_url || req.file.url || (req.file.path && req.file.path.startsWith('http') ? req.file.path : null);
+    req.body.coverImage = fileUrl || (req.file.filename && req.file.filename.startsWith('http') ? req.file.filename : "/uploads/blogs/" + req.file.filename);
   }
 
   if (typeof req.body.tags === "string") {
@@ -90,7 +91,8 @@ const getBlogBySlug = catchAsync(async (req, res) => {
 // Update a blog by ID
 const updateBlog = catchAsync(async (req, res) => {
   if (req.file) {
-    req.body.coverImage = "/uploads/blogs/" + req.file.filename;
+    const fileUrl = req.file.secure_url || req.file.url || (req.file.path && req.file.path.startsWith('http') ? req.file.path : null);
+    req.body.coverImage = fileUrl || (req.file.filename && req.file.filename.startsWith('http') ? req.file.filename : "/uploads/blogs/" + req.file.filename);
   }
 
   if (typeof req.body.tags === "string") {

@@ -1,7 +1,7 @@
 import { IoChevronBack } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { imageBaseUrl } from "../../../config/imageBaseUrl";
+import { imageBaseUrl, getImageUrl } from "../../../config/imageBaseUrl";
 import { logoutUser } from "../../../redux/features/auth/authSlice";
 import { useGetUserQuery} from "../../../redux/features/auth/authApi"; // Import the hooks
 
@@ -48,7 +48,7 @@ const PersonalInformation = () => {
             <div className="w-[130px] h-[130px] rounded-full bg-[#D9D9D9]">
               <img
                 className="size-32 rounded-full mx-auto"
-                src={`${imageBaseUrl}${currentUser?.profileImage}`}
+                src={getImageUrl(currentUser?.profileImage)}
                 alt=""
               />
             </div>

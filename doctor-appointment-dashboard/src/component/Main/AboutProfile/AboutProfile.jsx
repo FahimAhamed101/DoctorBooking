@@ -3,7 +3,7 @@ import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { BASE_URL } from "../../../utils/constants";
+import { BASE_URL, getImageUrl } from "../../../utils/constants";
 import { useGetAllTeamMembersQuery } from "../../../redux/features/product/teamApi";
 
 const { Meta } = Card;
@@ -15,8 +15,8 @@ const AboutProfile = () => {
     // Find the first admin team member
     const adminTeamMember = teamMembers.find(member => member?.isAdmin);
     console.log(teamMembers )
-    const profileImageUrl = `${BASE_URL}${user?.profileImage}`;
-    const adminProfileImageUrl = adminTeamMember?.profileImage ? `${BASE_URL}${adminTeamMember.profileImage}` : null;
+    const profileImageUrl = getImageUrl(user?.profileImage, "/default-profile.png");
+    const adminProfileImageUrl = adminTeamMember?.profileImage ? getImageUrl(adminTeamMember.profileImage, "/default-profile.png") : null;
 
     if (isLoading) {
         return <div className="flex justify-center items-center h-64">Loading...</div>;

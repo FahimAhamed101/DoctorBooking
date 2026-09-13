@@ -5,7 +5,7 @@ import { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { imageBaseUrl } from "../../../config/imageBaseUrl";
+import { imageBaseUrl, getImageUrl } from "../../../config/imageBaseUrl";
 import { useGetAppointmentsQuery } from "../../../redux/features/dashboard/dashboardApi";
 
 const { Item } = Form;
@@ -56,7 +56,7 @@ const AppointmentList = () => {
         <div className="flex items-center">
           <img
             className="w-8 h-8 rounded-full mr-2"
-            src={`${imageBaseUrl}${record.booker?.profileImage}`}
+            src={getImageUrl(record.booker?.profileImage, "https://randomuser.me/api/portraits/men/1.jpg")}
             alt="avatar"
             
           />

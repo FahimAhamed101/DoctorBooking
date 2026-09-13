@@ -12,7 +12,7 @@ import { useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
 import { IoIosSearch } from "react-icons/io";
 import { MdKeyboardArrowLeft } from "react-icons/md";
-import { imageBaseUrl } from "../../../config/imageBaseUrl";
+import { imageBaseUrl, getImageUrl } from "../../../config/imageBaseUrl";
 import { useGetAllUsersQuery } from "../../../redux/features/dashboard/dashboardApi";
 
 const { Item } = Form;
@@ -64,7 +64,7 @@ const Users = () => {
         <div className="flex items-center">
           <img
             className="w-8 h-8 rounded-full mr-2"
-            src={`${imageBaseUrl}${record.image}`}
+            src={getImageUrl(record.image)}
             alt="avatar"
             onError={(e) => {
               e.target.src = "https://randomuser.me/api/portraits/men/1.jpg";

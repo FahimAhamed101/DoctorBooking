@@ -1,7 +1,7 @@
 import { IoChevronBack } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { imageBaseUrl } from "../../../config/imageBaseUrl";
+import { imageBaseUrl, getImageUrl } from "../../../config/imageBaseUrl";
 import { logoutUser } from "../../../redux/features/auth/authSlice";
 import { useUpdateUserMutation, useGetUserQuery } from "../../../redux/features/auth/authApi";
 import { useState, useRef, useEffect } from "react";
@@ -39,7 +39,7 @@ const EditPersonalInfo = () => {
 
   const [profileImage, setProfileImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(
-    `${imageBaseUrl}/Uploads/users/default-profile.png`
+    getImageUrl(null, "/Uploads/users/default-profile.png")
   );
 
   // Update form data when user data is available
@@ -67,9 +67,7 @@ const EditPersonalInfo = () => {
       });
 
       setPreviewImage(
-        user?.profileImage
-          ? `${imageBaseUrl}${user.profileImage}`
-          : `${imageBaseUrl}/Uploads/users/default-profile.png`
+        getImageUrl(user?.profileImage, "/Uploads/users/default-profile.png")
       );
     }
   }, [user]);

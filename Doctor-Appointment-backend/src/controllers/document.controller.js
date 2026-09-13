@@ -10,7 +10,7 @@ const createDocument = catchAsync(async (req, res) => {
 
   if (req.files && req.files.files && req.files.files.length > 0) {
     req.body.files = req.files.files.map(
-      (file) => `/uploads/files/${file.filename}`
+      (file) => file.secure_url || file.url || (file.path && file.path.startsWith('http') ? file.path : (file.filename && file.filename.startsWith('http') ? file.filename : `/uploads/files/${file.filename}`))
     );
   }
 
@@ -85,7 +85,7 @@ const updateDocumentById = catchAsync(async (req, res) => {
 
   if (req.files && req.files.files && req.files.files.length > 0) {
     req.body.files = req.files.files.map(
-      (file) => `/uploads/files/${file.filename}`
+      (file) => file.secure_url || file.url || (file.path && file.path.startsWith('http') ? file.path : (file.filename && file.filename.startsWith('http') ? file.filename : `/uploads/files/${file.filename}`))
     );
   }
 

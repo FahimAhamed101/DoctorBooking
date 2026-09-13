@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { MdKeyboardArrowRight } from "react-icons/md";
 import { useGetAppointmentsQuery } from "../../../redux/features/dashboard/dashboardApi";
 import moment from "moment";
-import { imageBaseUrl } from "../../../config/imageBaseUrl";
+import { imageBaseUrl, getImageUrl } from "../../../config/imageBaseUrl";
 import { Link, useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 const months = [
@@ -215,7 +214,7 @@ const handleAddappointment = () =>{
                 >
                   <div className="flex items-center space-x-3">
                     <img
-                      src={`${appt.booker?.profileImage ? imageBaseUrl + appt.booker.profileImage : 'https://randomuser.me/api/portraits/men/1.jpg'}`}
+                      src={getImageUrl(appt.booker?.profileImage, 'https://randomuser.me/api/portraits/men/1.jpg')}
                       alt={appt.patientName}
                       className="w-10 h-10 rounded-full object-cover"
                       onError={(e) => {

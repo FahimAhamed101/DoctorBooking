@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Modal } from "antd";
 import { toast } from "sonner";
 import { useDeleteTeamMemberMutation } from "../../../redux/features/product/teamApi";
-import { BASE_URL } from "../../../utils/constants";
+import { BASE_URL, getImageUrl } from "../../../utils/constants";
 
 const TeamMemberCard = ({ product }) => {
   const [deleteTeamMember] = useDeleteTeamMemberMutation();
@@ -21,15 +21,13 @@ const TeamMemberCard = ({ product }) => {
           await deleteTeamMember(memberId).unwrap();
           toast.success("Team member deleted successfully");
         } catch (error) {
-          toast.error(error?.data?.message || "Failed to delete team member");
+          toast.error("Failed to delete team member");
         }
       },
     });
   };
 
-  const imageUrl = product?.profileImage
-    ? `${BASE_URL}${product.profileImage}`
-    : "/default-profile.png";
+  const imageUrl = getImageUrl(product?.profileImage, "/default-profile.png");
 
   return (
     <div className="bg-[#D5EDFF] rounded-lg shadow-md overflow-hidden border border-gray-200">

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useGetAppointmentsQuery } from "../../../redux/features/dashboard/dashboardApi"; 
 import moment from "moment";
-import { imageBaseUrl } from "../../../config/imageBaseUrl";
+import { imageBaseUrl, getImageUrl } from "../../../config/imageBaseUrl";
 const DayAppointment = () => {
   // Get today's date in YYYY-MM-DD format
   const today = moment().format("YYYY-MM-DD");
@@ -56,7 +56,7 @@ const DayAppointment = () => {
               
                       <div className="flex-shrink-0"> <Link to={`/appointments/${item.appointmentId}`}>
                   <img
-                    src={`${imageBaseUrl}${item.image}`}
+                    src={getImageUrl(item.image, "https://randomuser.me/api/portraits/men/1.jpg")}
                     alt={item.name}
                     className="w-[40px] h-[40px] rounded-full object-cover"
                     onError={(e) => {

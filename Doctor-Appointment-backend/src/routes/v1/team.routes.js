@@ -4,6 +4,7 @@ const { teamController } = require("../../controllers/");
 const auth = require("../../middlewares/auth");
 const teamFileUploadMiddleware = require("../../middlewares/fileUpload");
 const convertHeicToPngMiddleware = require("../../middlewares/converter");
+const cloudinaryUploadMiddleware = require("../../middlewares/cloudinaryUpload");
 const UPLOADS_FOLDER_TEAM = "./public/uploads/users";
 
 const uploadTeam = teamFileUploadMiddleware(UPLOADS_FOLDER_TEAM);
@@ -16,6 +17,7 @@ router
     auth("superAdmin"),
     [uploadTeam.single("profileImage")],
     convertHeicToPngMiddleware(UPLOADS_FOLDER_TEAM),
+    cloudinaryUploadMiddleware("users"),
     teamController.createTeam
   );
 
@@ -31,6 +33,7 @@ router
     auth("superAdmin"),
     [uploadTeam.single("profileImage")],
     convertHeicToPngMiddleware(UPLOADS_FOLDER_TEAM),
+    cloudinaryUploadMiddleware("users"),
     teamController.updateTeamById
   )
   .delete(auth("superAdmin"), teamController.deleteTeamById);

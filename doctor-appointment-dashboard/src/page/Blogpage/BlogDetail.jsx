@@ -47,7 +47,7 @@ const getFullImageUrl = (path) => {
         <div className="flex justify-center items-center mb-6">
           <Space size="large">
             <div className="flex items-center">
-              <Avatar src={blog.author?.profileImage} size="small" className="mr-2" />
+              <Avatar src={getFullImageUrl(blog.author?.profileImage)} size="small" className="mr-2" />
               <Text strong>{blog.author?.fullName}</Text>
             </div>
             <div className="flex items-center">

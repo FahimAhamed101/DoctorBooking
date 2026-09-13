@@ -1,9 +1,13 @@
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 
 module.exports = function (UPLOADS_FOLDER) {
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
+      if (!fs.existsSync(UPLOADS_FOLDER)) {
+        fs.mkdirSync(UPLOADS_FOLDER, { recursive: true });
+      }
       cb(null, UPLOADS_FOLDER); // Use the provided destination folder
     },
     filename: (req, file, cb) => {

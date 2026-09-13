@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { useGetValuesQuery, useDeleteValueMutation } from "../../../redux/features/value/valueApi";
 import { Skeleton, message, Modal, Empty } from "antd";
-import { BASE_URL } from "../../../utils/constants";
+import { BASE_URL, getImageUrl } from "../../../utils/constants";
 
 const ValuePage = () => {
   const { data: valuesData, isLoading, isError, refetch } = useGetValuesQuery();
@@ -72,9 +72,7 @@ const ValuePage = () => {
       {valueItems.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {valueItems.map((item) => {
-            const imageUrl = item.icon
-              ? `${BASE_URL}${item.icon}`
-              : "/default-profile.png";
+            const imageUrl = getImageUrl(item.icon, "/default-profile.png");
             
             return (
               <div 

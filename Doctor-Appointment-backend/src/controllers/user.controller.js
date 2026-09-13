@@ -86,8 +86,10 @@ const updateUser = catchAsync(async (req, res) => {
   const image = {};
   console.log(req.file);
   if (req.file) {
-    image.url = "/uploads/users/" + req.file.filename;
-    image.path = req.file.path;
+    const fileUrl = req.file.secure_url || req.file.url || (req.file.path && req.file.path.startsWith('http') ? req.file.path : null);
+    const finalUrl = fileUrl || (req.file.filename && req.file.filename.startsWith('http') ? req.file.filename : "/uploads/users/" + req.file.filename);
+    image.url = finalUrl;
+    image.path = finalUrl;
   }
   if (req.file) {
     req.body.image = image;
@@ -107,7 +109,8 @@ const updateUser = catchAsync(async (req, res) => {
 
 const updateProfile = catchAsync(async (req, res) => {
   if (req.file) {
-    req.body.profileImage = `/uploads/users/${req.file.filename}`;
+    const fileUrl = req.file.secure_url || req.file.url || (req.file.path && req.file.path.startsWith('http') ? req.file.path : null);
+    req.body.profileImage = fileUrl || (req.file.filename && req.file.filename.startsWith('http') ? req.file.filename : `/uploads/users/${req.file.filename}`);
   }
 
   if (typeof req.body.height === "string") {

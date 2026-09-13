@@ -7,7 +7,8 @@ const { valuesService } = require("../services");
 
 const valueCreate = catchAsync(async (req, res) => {
   if (req.file) {
-    req.body.icon = "/uploads/other/" + req.file.filename;
+    const fileUrl = req.file.secure_url || req.file.url || (req.file.path && req.file.path.startsWith('http') ? req.file.path : null);
+    req.body.icon = fileUrl || (req.file.filename && req.file.filename.startsWith('http') ? req.file.filename : "/uploads/other/" + req.file.filename);
   }
   const value = await valuesService.createValue(req.body);
 
@@ -35,7 +36,8 @@ const valueGetById = catchAsync(async (req, res) => {
 
 const valueUpdateById = catchAsync(async (req, res) => {
   if (req.file) {
-    req.body.icon = "/uploads/other/" + req.file.filename;
+    const fileUrl = req.file.secure_url || req.file.url || (req.file.path && req.file.path.startsWith('http') ? req.file.path : null);
+    req.body.icon = fileUrl || (req.file.filename && req.file.filename.startsWith('http') ? req.file.filename : "/uploads/other/" + req.file.filename);
   }
   const value = await valuesService.updateValueById(req.params.id, req.body);
   res.status(httpStatus.OK).json(

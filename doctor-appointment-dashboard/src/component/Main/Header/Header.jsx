@@ -4,7 +4,7 @@ import { FiMenu } from "react-icons/fi";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { imageBaseUrl } from "../../../config/imageBaseUrl";
+import { imageBaseUrl, getImageUrl } from "../../../config/imageBaseUrl";
 import { useUpdateUserMutation, useGetUserQuery } from "../../../redux/features/auth/authApi";
 const Header = ({ toggleSidebar }) => {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const Header = ({ toggleSidebar }) => {
         </Link>
         <img
           onClick={() => navigate("/personal-info")}
-          src={ user?.profileImage ? `${imageBaseUrl}${user?.profileImage}` : "/src/assets/user.png"}
+          src={getImageUrl(user?.profileImage, "/src/assets/user.png")}
           className="size-10 rounded-full cursor-pointer"
         />
       </div>

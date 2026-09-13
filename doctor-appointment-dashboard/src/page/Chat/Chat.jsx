@@ -194,7 +194,7 @@ const ChatPage = ({ onConversationSelect }) => {
                   })
                 : '';
               const receiverImage = otherUser.profileImage
-                ? `${BASE_URL}${otherUser.profileImage}`
+                ? (otherUser.profileImage.startsWith('http') ? otherUser.profileImage : `${BASE_URL}${otherUser.profileImage}`)
                 : "/uploads/user.png";
 
               return (
