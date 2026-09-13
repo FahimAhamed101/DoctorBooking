@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 const { toJSON, paginate } = require("./plugins");
 
 const blogSchema = new mongoose.Schema(
