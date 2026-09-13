@@ -1,2 +1,4 @@
-//export const imageBaseUrl = "http://localhost:5000"
- export const imageBaseUrl = "https://api.trustedgpclinic.com"
+export const imageBaseUrl =
+  import.meta.env.VITE_IMAGE_BASE_URL ||
+  import.meta.env.VITE_BASE_URL ||
+  "https://api.trustedgpclinic.com";
