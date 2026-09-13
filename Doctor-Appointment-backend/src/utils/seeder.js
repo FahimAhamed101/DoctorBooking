@@ -993,22 +993,22 @@ We examine evidence-based interventions:
     {
       name: "Patient-Centered Compassion",
       description: "We place our patients at the heart of every clinical decision, delivering empathetic, individualized medical care tailored to your family's needs.",
-      icon: "heart-pulse",
+      icon: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331741/doctor-booking/values/heart-pulse.svg",
     },
     {
       name: "Clinical Excellence & Integrity",
       description: "Our board-certified physicians adhere to the highest international healthcare standards, rigorous training, and cutting-edge evidence-based medicine.",
-      icon: "award",
+      icon: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331736/doctor-booking/values/award.svg",
     },
     {
       name: "Uncompromising Privacy & Trust",
       description: "We protect your medical data with enterprise-grade encryption and adhere to strict patient confidentiality and ethical clinical guidelines.",
-      icon: "shield-check",
+      icon: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331738/doctor-booking/values/shield-check.svg",
     },
     {
       name: "Accessible Digital Healthcare",
       description: "Bridging the distance between patients and specialists through seamless telehealth video consultations, instant booking, and electronic health records.",
-      icon: "laptop-medical",
+      icon: "https://res.cloudinary.com/fahim1213456/image/upload/v1789331739/doctor-booking/values/laptop-medical.svg",
     },
   ]);
   console.log(`Seeded ${clinicValues.length} Clinic Values successfully.`);
