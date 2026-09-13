@@ -12,6 +12,7 @@ yarn-error.log
 coverage
 
 app.log*
-
-/public
+# Allow public static assets (blogs, users seed files)
+!/public
+!/public/**
 /dist

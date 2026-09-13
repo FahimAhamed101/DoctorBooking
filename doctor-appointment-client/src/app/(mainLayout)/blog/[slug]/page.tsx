@@ -11,7 +11,11 @@ import dayjs from "dayjs";
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import blog1 from "@/assets/blogs/blog1.png";
+import blog2 from "@/assets/blogs/blog2.png";
+import blog3 from "@/assets/blogs/blog3.png";
+import defaultProfile from "@/../public/default-profile.png";
 import type { MDXComponents as MDXComponentsType } from 'mdx/types';
 
 interface BlogDetailsProps {
@@ -125,15 +129,42 @@ const BlogDetails = ({ params }: BlogDetailsProps) => {
   const blog = data?.data?.attributes;
   if (!blog) return <div className="text-center py-10">Blog not found</div>;
 
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://10.0.60.18:6060";
+  const backendUrl = (process.env.NEXT_PUBLIC_BACKEND_URL || "https://doctorbooking-2wjk.onrender.com").replace(/\/+$/, '');
 
-  const imageUrl = blog.coverImage.startsWith("http")
-    ? blog.coverImage
-    : `${backendUrl}${blog.coverImage}`;
+  const getCategoryFallback = (category?: string, slug?: string) => {
+    const cat = (category || slug || '').toLowerCase();
+    if (cat.includes('pediatric') || cat.includes('child')) return blog2.src;
+    if (cat.includes('allergy') || cat.includes('general') || cat.includes('respiratory')) return blog3.src;
+    return blog1.src;
+  };
 
-  const authorImageUrl = blog.author.profileImage.startsWith("http")
-    ? blog.author.profileImage
-    : `${backendUrl}${blog.author.profileImage}`;
+  const getFullImageUrl = (rawImage?: string) => {
+    if (!rawImage) return getCategoryFallback(blog?.category, blog?.slug);
+    if (rawImage.startsWith('http://') || rawImage.startsWith('https://')) {
+      return rawImage;
+    }
+    const cleanPath = rawImage.startsWith('/') ? rawImage : `/${rawImage}`;
+    return `${backendUrl}${cleanPath}`;
+  };
+
+  const getAuthorImageUrl = (rawImage?: string) => {
+    if (!rawImage) return defaultProfile.src;
+    if (rawImage.startsWith('http://') || rawImage.startsWith('https://')) {
+      return rawImage;
+    }
+    const cleanPath = rawImage.startsWith('/') ? rawImage : `/${rawImage}`;
+    return `${backendUrl}${cleanPath}`;
+  };
+
+  const [coverSrc, setCoverSrc] = useState<string>(() => getFullImageUrl(blog?.coverImage));
+  const [authorSrc, setAuthorSrc] = useState<string>(() => getAuthorImageUrl(blog?.author?.profileImage));
+
+  useEffect(() => {
+    if (blog) {
+      setCoverSrc(getFullImageUrl(blog.coverImage));
+      setAuthorSrc(getAuthorImageUrl(blog.author?.profileImage));
+    }
+  }, [blog?.coverImage, blog?.author?.profileImage, backendUrl]);
 
 
  const blogUrl = `${window.location.origin}/blog/${blog.slug}`;
@@ -181,11 +212,14 @@ const BlogDetails = ({ params }: BlogDetailsProps) => {
           {/* Blog Image */}
           <div className="relative w-full aspect-[16/9] md:aspect-[3/1] rounded-xl overflow-hidden">
             <Image
-              src={imageUrl}
+              src={coverSrc}
               alt={blog.title}
               fill
               className="object-cover"
               priority
+              onError={() => {
+                setCoverSrc(getCategoryFallback(blog.category, blog.slug));
+              }}
             />
           </div>
 
@@ -219,10 +253,13 @@ const BlogDetails = ({ params }: BlogDetailsProps) => {
             <div className="flex items-center space-x-3">
               <div className="relative w-10 h-10 rounded-full overflow-hidden">
                 <Image
-                  src={authorImageUrl}
-                  alt={blog.author.fullName}
+                  src={authorSrc}
+                  alt={blog.author?.fullName || "Author"}
                   fill
                   className="object-cover"
+                  onError={() => {
+                    setAuthorSrc(defaultProfile.src);
+                  }}
                 />
               </div>
               <div>

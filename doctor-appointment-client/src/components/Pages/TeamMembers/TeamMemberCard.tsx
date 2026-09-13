@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,33 +20,53 @@ interface TeamMember {
 }
 
 const TeamMemberCard: React.FC<{ member: TeamMember }> = ({ member }) => {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://10.0.60.18:6060';
-  const imageUrl = member.imageUrl.startsWith('http') 
-    ? member.imageUrl
-    : `${backendUrl}${member.imageUrl}`;
+  const backendUrl = (process.env.NEXT_PUBLIC_BACKEND_URL || 'https://doctorbooking-2wjk.onrender.com').replace(/\/+$/, '');
+
+  const getDoctorFallback = (name?: string, specialty?: string) => {
+    const text = `${name || ''} ${specialty || ''}`.toLowerCase();
+    if (text.includes('marcus') || text.includes('chen') || text.includes('dermatol')) return '/uploads/users/doctor-3.png';
+    if (text.includes('rachel') || text.includes('green') || text.includes('pediatr')) return '/uploads/users/doctor-4.png';
+    if (text.includes('sophia') || text.includes('martinez') || text.includes('cardio')) return '/uploads/users/doctor-2.png';
+    return '/uploads/users/doctor-1.png';
+  };
+
+  const getFullImageUrl = (rawImage?: string) => {
+    if (!rawImage) return getDoctorFallback(member.name, member.specialty);
+    if (rawImage.startsWith('http://') || rawImage.startsWith('https://')) {
+      return rawImage;
+    }
+    const cleanPath = rawImage.startsWith('/') ? rawImage : `/${rawImage}`;
+    return `${backendUrl}${cleanPath}`;
+  };
+
+  const [imgSrc, setImgSrc] = useState<string>(() => getFullImageUrl(member.imageUrl));
+
+  useEffect(() => {
+    setImgSrc(getFullImageUrl(member.imageUrl));
+  }, [member.imageUrl, backendUrl]);
 
   return (
     <div className="bg-[#EEE2EE] text-[#fff] shadow-lg rounded-xl overflow-hidden px-4 py-4">
       {/* Profile Image with rounded top corners */}
-  <div className="relative w-full h-96 mb-3">
-  <Link href={`/team-members/${member.id}`} className="block h-full">
-    <div className="relative h-full rounded-t-lg overflow-hidden">
-      <Image
-        src={imageUrl}
-        alt={member.name}
-        fill
-        className="object-cover"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        onError={(e) => {
-          const target = e.target as HTMLImageElement;
-          target.src = '/default-profile.png';
-        }}
-      />
-      {/* Bottom shadow effect */}
-      <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#EEE2EE] to-transparent pointer-events-none"></div>
-    </div>
-  </Link>
-</div>
+      <div className="relative w-full h-96 mb-3">
+        <Link href={`/team-members/${member.id}`} className="block h-full">
+          <div className="relative h-full rounded-t-lg overflow-hidden">
+            <Image
+              src={imgSrc}
+              alt={member.name}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={false}
+              onError={() => {
+                setImgSrc(getDoctorFallback(member.name, member.specialty));
+              }}
+            />
+            {/* Bottom shadow effect */}
+            <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#EEE2EE] to-transparent pointer-events-none"></div>
+          </div>
+        </Link>
+      </div>
 
       {/* Profile Info */}
       <div className="px-2 pb-2">

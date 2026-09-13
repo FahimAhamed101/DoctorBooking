@@ -154,7 +154,7 @@ const ProfileForm: React.FC = () => {
   useEffect(() => {
     if (profile?.data?.attributes) {
       const { user } = profile.data.attributes;
-      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://10.0.60.18:6060';
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://doctorbooking-2wjk.onrender.com';
       const fullImageUrl = user.profileImage?.startsWith('http') 
         ? user.profileImage
         : user.profileImage
@@ -422,7 +422,7 @@ const ProfileForm: React.FC = () => {
 
   const profileData = profile?.data?.attributes;
   const documents: Document[] = profileData?.documents || [];
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://10.0.60.18:6060';
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://doctorbooking-2wjk.onrender.com';
 
   const processedDocuments = documents.map(doc => ({
     ...doc,

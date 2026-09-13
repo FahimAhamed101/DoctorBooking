@@ -47,7 +47,7 @@ export default function AllAppointmentsWithTimers() {
   const { data: profile } = useGetProfileQuery(undefined);
   const profileData = profile?.data?.attributes;
 
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://10.0.60.18:6060';
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://doctorbooking-2wjk.onrender.com';
   const imageUrl = profileData?.user?.profileImage?.startsWith('http') 
     ? profileData.user.profileImage
     : profileData?.user?.profileImage

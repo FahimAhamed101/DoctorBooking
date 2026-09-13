@@ -1,4 +1,5 @@
 "use client";
+import React, { useState, useEffect } from "react";
 import circle from "@/assets/hero-section/circle.png";
 import profileImage from "@/assets/hero-section/nurse.png";
 import CustomBreadcrumb from "@/components/UI/CustomBreadcrumb";
@@ -75,10 +76,32 @@ const MemberDetails = ({ memberId }: MemberDetailsProps) => {
 
   const member = data.data.attributes.team;
   const schedule = data.data.attributes.scheduleList;
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://10.0.60.18:6060';
-  const imageUrl = member.profileImage.startsWith('http') 
-    ? member.profileImage
-    : `${backendUrl}${member.profileImage}`;
+  const backendUrl = (process.env.NEXT_PUBLIC_BACKEND_URL || 'https://doctorbooking-2wjk.onrender.com').replace(/\/+$/, '');
+
+  const getDoctorFallback = (name?: string, specialty?: string) => {
+    const text = `${name || ''} ${specialty || ''}`.toLowerCase();
+    if (text.includes('marcus') || text.includes('chen') || text.includes('dermatol')) return '/uploads/users/doctor-3.png';
+    if (text.includes('rachel') || text.includes('green') || text.includes('pediatr')) return '/uploads/users/doctor-4.png';
+    if (text.includes('sophia') || text.includes('martinez') || text.includes('cardio')) return '/uploads/users/doctor-2.png';
+    return '/uploads/users/doctor-1.png';
+  };
+
+  const getFullImageUrl = (rawImage?: string) => {
+    if (!rawImage) return getDoctorFallback(member?.fullName, member?.specialties);
+    if (rawImage.startsWith('http://') || rawImage.startsWith('https://')) {
+      return rawImage;
+    }
+    const cleanPath = rawImage.startsWith('/') ? rawImage : `/${rawImage}`;
+    return `${backendUrl}${cleanPath}`;
+  };
+
+  const [docSrc, setDocSrc] = useState<string>(() => getFullImageUrl(member?.profileImage));
+
+  useEffect(() => {
+    if (member) {
+      setDocSrc(getFullImageUrl(member.profileImage));
+    }
+  }, [member?.profileImage, backendUrl]);
 
   return (
     <section className="w-full py-10">
@@ -97,9 +120,12 @@ const MemberDetails = ({ memberId }: MemberDetailsProps) => {
                 className="h-[300px] w-[300px] -mr-14 md:-mr-16 xl:-mr-20 "
               />
               <img
-                src={imageUrl || profileImage.src}
+                src={docSrc}
                 alt={member.fullName}
-                className="h-[430px] lg:h-[430px] xl:h-[430px] 2xl:h-[430px] bottom-0 right-[61px] absolute"
+                className="h-[430px] lg:h-[430px] xl:h-[430px] 2xl:h-[430px] bottom-0 right-[61px] absolute object-contain"
+                onError={() => {
+                  setDocSrc(getDoctorFallback(member.fullName, member.specialties));
+                }}
               />
             </div>
           </div>

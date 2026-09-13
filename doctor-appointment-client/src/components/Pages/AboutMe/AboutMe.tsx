@@ -76,7 +76,7 @@ const AboutMe = () => {
     console.error("Error parsing media:", e);
   }
 
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://10.0.60.18:6060';
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://doctorbooking-2wjk.onrender.com';
   const imageUrl = aboutMeData?.profileImage
     ? `${backendUrl}${aboutMeData?.profileImage}`
     : profileImage.src;
@@ -103,7 +103,11 @@ const AboutMe = () => {
               <img
                 src={imageUrl}
                 alt={`Profile of ${aboutMeData.fullName}`}
-                className="h-[470px] bottom-0 absolute ml-[2.5rem] object-cover"
+                className="h-[470px] bottom-0 absolute ml-[2.5rem] object-contain"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = '/uploads/users/doctor-1.png';
+                }}
               />
             </div>
           </div>
